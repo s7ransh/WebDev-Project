@@ -1,0 +1,567 @@
+/* ---------- Design tokens (black & white) ---------- */
+:root {
+    --background: #000000;
+    --surface: #0a0a0a;
+    --text: #ffffff;
+    --muted: #a6a6a6;
+    --accent: #ffffff;
+    --border: #2b2b2b;
+    --radius: 2px;
+    --max-width: 1100px;
+}
+
+/* ---------- Base ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 72px; /* keeps headings clear of the sticky navbar */
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+h1, h2, h3 {
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 32px;
+}
+
+h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.section {
+    padding: 90px 0;
+}
+
+.section-alt {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+/* ---------- Buttons (Flexbox alignment + transition) ---------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 26px;
+    border-radius: var(--radius);
+    border: 1px solid var(--text);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: var(--text);
+    color: var(--background);
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: var(--text);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text);
+}
+
+.btn-outline:hover {
+    background: var(--text);
+    color: var(--background);
+}
+
+[aria-disabled="true"] {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 3px;
+}
+
+/* ---------- Navbar (sticky + Flexbox) ---------- */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 14px 24px;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    border: 1px solid var(--text);
+    border-radius: var(--radius);
+    padding: 2px 10px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text);
+}
+
+/* ---------- Hero (relative + absolute + z-index, keyframe animation) ---------- */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 130px 0 120px;
+}
+
+.shape {
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    border: 1px solid var(--text);
+    opacity: 0.25;
+    z-index: 0;
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    animation: fade-up 0.8s ease both;
+}
+
+.hero-greeting {
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+
+.hero-role {
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+.hero-intro {
+    max-width: 520px;
+    color: var(--muted);
+    margin-bottom: 36px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(18px); }
+}
+
+/* ---------- About ---------- */
+.about-text {
+    max-width: 640px;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+
+/* ---------- Cards ---------- */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: var(--text);
+}
+
+.section-alt .card {
+    background: var(--background);
+}
+
+/* ---------- Skills (Grid) ---------- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.pills li {
+    padding: 4px 14px;
+    border: 1px solid var(--text);
+    border-radius: 999px;
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* ---------- Projects (Grid) ---------- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+}
+
+.project-thumb {
+    height: 150px;
+    padding: 20px;
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+}
+
+.project-thumb span {
+    background: var(--text);
+    border-radius: var(--radius);
+}
+
+.thumb-flex {
+    display: flex;
+    gap: 10px;
+}
+
+.thumb-flex span {
+    flex: 1;
+}
+
+.thumb-flex span:nth-child(2) {
+    flex: 2;
+}
+
+.thumb-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+}
+
+.thumb-anim {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thumb-anim span {
+    width: 56px;
+    height: 56px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.project-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 24px;
+}
+
+.project-body p {
+    color: var(--muted);
+    margin-bottom: 12px;
+}
+
+.project-body .tech {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 12px;
+}
+
+/* ---------- Education ---------- */
+.education-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.meta {
+    color: var(--muted);
+}
+
+.edu-note {
+    color: var(--muted);
+}
+
+/* ---------- Contact (Flexbox) ---------- */
+.contact-wrap {
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-info h2 {
+    margin-bottom: 24px;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-links a {
+    color: var(--text);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+}
+
+.contact-links a:hover {
+    color: var(--muted);
+    text-decoration: underline;
+}
+
+.contact-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+}
+
+.contact-form label {
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font: inherit;
+    color: var(--text);
+    background: var(--background);
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form .btn {
+    align-self: flex-start;
+}
+
+/* ---------- Footer (Flexbox) ---------- */
+.site-footer {
+    background: var(--background);
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 28px 0;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--text);
+}
+
+/* ---------- Responsive ---------- */
+/* Tablet */
+@media (max-width: 900px) {
+    .skills-grid,
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav-cta {
+        display: none;
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .section {
+        padding: 56px 0;
+    }
+
+    .hero {
+        padding: 72px 0 64px;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 18px;
+    }
+
+    .skills-grid,
+    .projects-grid,
+    .education-list {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-wrap {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .contact-form {
+        width: 100%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
